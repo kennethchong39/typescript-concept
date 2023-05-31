@@ -1,3 +1,4 @@
+"use strict";
 /**
  * Core Types -> number, string, boolean
  */
@@ -8,9 +9,9 @@ function add(n1, n2, showResult) {
     }
     return n1 + n2;
 }
-var number1 = 5;
-var number2 = 2.8;
-var result = add(number1, number2);
+const number1 = 5;
+const number2 = 2.8;
+const result = add(number1, number2);
 console.log(result);
 /**
  * Typescript Types vs JavaScript Types
@@ -27,25 +28,28 @@ console.log(result);
  */
 // ******* Object Types
 // { age: 30 }
-var person = {
+const person = {
     name: "Max",
-    age: 30
+    age: 30,
 };
 console.log(person);
-var product = {
+const product = {
     id: "abc1",
     price: 12.99,
     tags: ["great-offer", "hot-and-new"],
     details: {
         title: "Red Carpet",
-        description: "A great carpet - almost brand-new!"
-    }
+        description: "A great carpet - almost brand-new!",
+    },
 };
 // ******* Array
-var arr = [1, 2, 3, 4];
-// Tuple
-// Special type to tell you that role[0] is number and role[1] is string
-var role = [2, "author"];
+const arr = [1, 2, 3, 4];
+// ******* Tuple
+/**
+ * Special type to tell you that role[0] is number and role[1] is string
+ * Using push will still attached to the array because TS can't catch it but array call will be able to do so
+ */
+const role = [2, "author"];
 // ******* Enum
 // after = is your value you want to assign to the enum
 var Role;
@@ -54,13 +58,13 @@ var Role;
     Role["READ_ONLY"] = "READ_ONLY";
     Role["AUTHOR"] = "AUTHOR";
 })(Role || (Role = {}));
-var roleEnum = Role.ADMIN;
+const roleEnum = Role.ADMIN;
 // ******* Any
 // Any kind of value
-var test = 123;
+const test = 123;
 // ******* Union
 function combineUnion(input1, input2) {
-    var result;
+    let result;
     if (typeof input1 === "number" && typeof input2 === "number") {
         result = input1 + input2;
     }
@@ -69,13 +73,13 @@ function combineUnion(input1, input2) {
     }
     return result;
 }
-var combinedAgesUnion = combineUnion(30, 25);
+const combinedAgesUnion = combineUnion(30, 25);
 console.log(combinedAgesUnion);
-var combinedNamesUnion = combineUnion("Max", "Anna");
+const combinedNamesUnion = combineUnion("Max", "Anna");
 console.log(combinedNamesUnion);
 // ***** Literal
 function combineLiteral(input1, input2, resultConversion) {
-    var result;
+    let result;
     if ((typeof input1 === "number" && typeof input2 === "number") ||
         resultConversion === "as-number") {
         result = +input1 + +input2;
@@ -90,14 +94,14 @@ function combineLiteral(input1, input2, resultConversion) {
         return result.toString();
     }
 }
-var combinedAgesLiteral = combineLiteral(30, 25, "as-number");
+const combinedAgesLiteral = combineLiteral(30, 25, "as-number");
 console.log(combinedAgesLiteral);
-var combinedStringAgesLiteral = combineLiteral("30", 25, "as-number");
+const combinedStringAgesLiteral = combineLiteral("30", 25, "as-number");
 console.log(combinedStringAgesLiteral);
-var combinedNamesLiteral = combineLiteral("Max", "Anna", "as-text");
+const combinedNamesLiteral = combineLiteral("Max", "Anna", "as-text");
 console.log(combinedAgesLiteral);
 function combine(input1, input2, resultConversion) {
-    var result;
+    let result;
     if ((typeof input1 === "number" && typeof input2 === "number") ||
         resultConversion === "as-number") {
         result = +input1 + +input2;
@@ -125,20 +129,20 @@ printResult(addition(5, 12));
 // combineValues = add;
 // console.log(combineValues(8, 8));
 // This is precise
-var combineValues;
+let combineValues;
 combineValues = add;
 console.log(combineValues(8, 8));
 function addAndHandle(n1, n2, cb) {
-    var result = n1 + n2;
+    const result = n1 + n2;
     cb(result);
 }
-addAndHandle(10, 20, function (result) {
+addAndHandle(10, 20, (result) => {
     console.log(result);
 });
 // ******* unknown
 //  unknwon is more restrictive than any type
-var userInput;
-var userName;
+let userInput;
+let userName;
 userInput = 5;
 userInput = "Max";
 // This won't work so you need to do extra type check like below (if loop);
@@ -150,5 +154,5 @@ if (typeof userInput === "string") {
 function generateError(message, code) {
     throw { message: message, errorCode: code };
 }
-var res = generateError("An error occurred!", 500);
+const res = generateError("An error occurred!", 500);
 console.log(res);

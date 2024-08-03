@@ -77,4 +77,5 @@
   },
   "exclude": ["./TypescriptCompiler/analytics.ts", "node_modules"] // node_modules would be the default
   // "include": [] // similar to exclude to include the file
+  // "files": [ 'app.ts'] // set for specific file only to be compiled
 }

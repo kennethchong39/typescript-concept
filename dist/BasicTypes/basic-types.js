@@ -9,13 +9,16 @@ function add(n1, n2, showResult) {
     }
     return n1 + n2;
 }
+let num = 3;
 const number1 = 5;
 const number2 = 2.8;
 const result = add(number1, number2);
 console.log(result);
+add(number1, number2, true);
 /**
  * Typescript Types vs JavaScript Types
  *  - In JS, can use typeof variable (ex: typeof n1 = number) (dynamic type)
+ *      - fail in runtime
  *  - In TS, it can help enforce type during development before compile time (static type)
  */
 /**
@@ -25,6 +28,10 @@ console.log(result);
 /**
  * Type Assignment & Type Inference
  *  - It's compiler has type inference so variables with value no need to assign type
+ *
+ *  - type inference:
+ *      let num1: number;
+ *       num1 = 5;
  */
 // ******* Object Types
 // { age: 30 }
@@ -46,6 +53,7 @@ const product = {
 const arr = [1, 2, 3, 4];
 // ******* Tuple
 /**
+ * A fixed length array.
  * Special type to tell you that role[0] is number and role[1] is string
  * Using push will still attached to the array because TS can't catch it but array call will be able to do so
  */
@@ -78,6 +86,7 @@ console.log(combinedAgesUnion);
 const combinedNamesUnion = combineUnion("Max", "Anna");
 console.log(combinedNamesUnion);
 // ***** Literal
+// a more concrete sub-type of a collective type  such as ("as-number" | "as-text")
 function combineLiteral(input1, input2, resultConversion) {
     let result;
     if ((typeof input1 === "number" && typeof input2 === "number") ||
@@ -124,7 +133,7 @@ function printResult2(num) {
 }
 printResult(addition(5, 12));
 // ******* Function as Types
-// This is not precise
+// This is not precise / detailed
 // let combineValues: Function;
 // combineValues = add;
 // console.log(combineValues(8, 8));
@@ -151,6 +160,7 @@ if (typeof userInput === "string") {
     userName = userInput;
 }
 // ***** never
+// use never when the fn never produce a value
 function generateError(message, code) {
     throw { message: message, errorCode: code };
 }

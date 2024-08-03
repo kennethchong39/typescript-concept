@@ -10,15 +10,19 @@ function add(n1: number, n2: number, showResult?: boolean) {
   return n1 + n2;
 }
 
+let num = 3;
 const number1 = 5;
 const number2 = 2.8;
 
 const result: number = add(number1, number2);
 console.log(result);
 
+add(number1, number2, true);
+
 /**
  * Typescript Types vs JavaScript Types
  *  - In JS, can use typeof variable (ex: typeof n1 = number) (dynamic type)
+ *      - fail in runtime
  *  - In TS, it can help enforce type during development before compile time (static type)
  */
 
@@ -30,6 +34,10 @@ console.log(result);
 /**
  * Type Assignment & Type Inference
  *  - It's compiler has type inference so variables with value no need to assign type
+ *
+ *  - type inference:
+ *      let num1: number;
+ *       num1 = 5;
  */
 
 // ******* Object Types
@@ -64,6 +72,7 @@ const arr: number[] = [1, 2, 3, 4];
 
 // ******* Tuple
 /**
+ * A fixed length array.
  * Special type to tell you that role[0] is number and role[1] is string
  * Using push will still attached to the array because TS can't catch it but array call will be able to do so
  */
@@ -103,6 +112,7 @@ const combinedNamesUnion = combineUnion("Max", "Anna");
 console.log(combinedNamesUnion);
 
 // ***** Literal
+// a more concrete sub-type of a collective type  such as ("as-number" | "as-text")
 function combineLiteral(
   input1: number | string,
   input2: number | string,
@@ -136,6 +146,34 @@ const combinedNamesLiteral = combineLiteral("Max", "Anna", "as-text");
 console.log(combinedAgesLiteral);
 
 // **** Type Aliases / Custom Types
+
+/**
+ * Type aliases can be used to "create" your own types.
+ * You're not limited to storing union types though -
+ * you can also provide an alias to a (possibly complex) object type.
+ */
+
+/**
+ * Type allows
+ *  - union and intersection types
+ *  - primitive types
+ *  - tuple types
+ *  - function types
+ *  - complex types
+ *
+ * Use type when you need to define complex types or when you need to work with unions, intersections, or tuples.
+ */
+
+/**
+ * Interface allows
+ *  - defining object shapes
+ *  - extending interfaces
+ *  - implmenting interfaces in classes
+ *  - declarative merging
+ *
+ * Use interface when you need to define the shape of an object or class and when you need to take advantage of features like extending and declaration merging.
+ */
+
 type Combinable = number | string;
 
 function combine(
@@ -173,7 +211,7 @@ function printResult2(num: number): undefined {
 printResult(addition(5, 12));
 
 // ******* Function as Types
-// This is not precise
+// This is not precise / detailed
 // let combineValues: Function;
 
 // combineValues = add;
@@ -212,6 +250,7 @@ if (typeof userInput === "string") {
 }
 
 // ***** never
+// use never when the fn never produce a value
 function generateError(message: string, code: number): never {
   throw { message: message, errorCode: code };
 }

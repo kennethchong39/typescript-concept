@@ -18,11 +18,11 @@ user1 = {
 user1.greet("printing");
 
 /**
- * Interfaces describe the stucture of the object
+ * Interfaces describe the stucture of the object/class
  *
  * Type is more flexible since it can do union and intersection
  *
- * Interfaces is super clear you want to define the structure of the object.
+ * Interfaces is super clear you want to define the structure of the object/class.
  * - it works like a contract where you implement on classes and a class then has to adhere to it
  *
  */

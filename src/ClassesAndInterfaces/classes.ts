@@ -176,7 +176,7 @@ console.log(employee1, Department.fiscalYear);
 /**
  * you have to append abstract to the class name and then the describe method like so
  *
- * abstarct class Department {
+ * abstract class Department {
  *    abstract describe(this: Department) : void;
  * }
  *

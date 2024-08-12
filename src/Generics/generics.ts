@@ -107,7 +107,7 @@ textStorage.addItem("Manu");
 textStorage.removeItem("Max");
 console.log(textStorage.getItems());
 
-const numberStorage = new DataStorage<number>();
+const numberStorag = new DataStorage<number>();
 
 // below isn't good because object is reference in nature so the removeItem no able to remove correct object
 // const objectStorage = new DataStorage<object>();

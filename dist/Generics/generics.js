@@ -81,7 +81,7 @@ textStorage.addItem("Max");
 textStorage.addItem("Manu");
 textStorage.removeItem("Max");
 console.log(textStorage.getItems());
-const numberStorage = new DataStorage();
+const numberStorag = new DataStorage();
 function createCourseGoal(title, description, date) {
     let courseGoal = {};
     courseGoal.title = title;

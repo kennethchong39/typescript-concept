@@ -1,6 +1,6 @@
 "use strict";
 /**
- * Core Types -> number, string, boolean
+ * Core Types -> number (no differentiation between integers and floats), string, boolean
  */
 // ******* string, number, boolean is types in typescript. All lowercase.
 function add(n1, n2, showResult) {
@@ -20,6 +20,7 @@ add(number1, number2, true);
  *  - In JS, can use typeof variable (ex: typeof n1 = number) (dynamic type)
  *      - fail in runtime
  *  - In TS, it can help enforce type during development before compile time (static type)
+ *      - fail in development time instead of runtime
  */
 /**
  * Type Casing
@@ -35,6 +36,17 @@ add(number1, number2, true);
  */
 // ******* Object Types
 // { age: 30 }
+// "object" isn't a good practice as it doesn't explicitly tell us what is inside the object
+const personObj = {
+    name: "Max",
+    age: 30,
+};
+// a better way is to explicitly label each key in the object
+const personExObj = {
+    name: "Max",
+    age: 30,
+};
+// but we can use type inference instead since this is just a variable; except tuple is available
 const person = {
     name: "Max",
     age: 30,
@@ -59,6 +71,13 @@ const arr = [1, 2, 3, 4];
  */
 const role = [2, "author"];
 // ******* Enum
+// default to 0, 1, 2 in order
+var R;
+(function (R) {
+    R[R["ADMIN"] = 0] = "ADMIN";
+    R[R["READ_ONLY"] = 1] = "READ_ONLY";
+    R[R["AUTHOR"] = 2] = "AUTHOR";
+})(R || (R = {}));
 // after = is your value you want to assign to the enum
 var Role;
 (function (Role) {
@@ -69,6 +88,7 @@ var Role;
 const roleEnum = Role.ADMIN;
 // ******* Any
 // Any kind of value
+// avoid if possible > it doesn't explicitly tells us what type it is
 const test = 123;
 // ******* Union
 function combineUnion(input1, input2) {
@@ -123,10 +143,11 @@ function combine(input1, input2, resultConversion) {
 function addition(n1, n2) {
     return n1 + n2;
 }
+// if you don't have a return statement
 function printResult(num) {
     console.log("Result:" + num);
 }
-// undefined = return empty;
+// undefined = return empty; (required to return)
 function printResult2(num) {
     console.log("Result:" + num);
     return;

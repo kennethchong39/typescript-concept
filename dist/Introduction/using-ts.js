@@ -9,7 +9,7 @@
 //   console.log(add(+input1.value, +input2.value));
 // });
 /**
- * typscript is a programming langauge - install a compiler > convert it into js
+ * typscript is a programming langauge also a "tool" - install a compiler > convert it into js
  *
  * Types
  * Next-gen JS features (compiled down for older Browsers)

@@ -1,5 +1,5 @@
 /**
- * Core Types -> number, string, boolean
+ * Core Types -> number (no differentiation between integers and floats), string, boolean
  */
 // ******* string, number, boolean is types in typescript. All lowercase.
 function add(n1: number, n2: number, showResult?: boolean) {
@@ -24,6 +24,7 @@ add(number1, number2, true);
  *  - In JS, can use typeof variable (ex: typeof n1 = number) (dynamic type)
  *      - fail in runtime
  *  - In TS, it can help enforce type during development before compile time (static type)
+ *      - fail in development time instead of runtime
  */
 
 /**
@@ -42,7 +43,20 @@ add(number1, number2, true);
 
 // ******* Object Types
 // { age: 30 }
-const person: { name: string; age: number } = {
+// "object" isn't a good practice as it doesn't explicitly tell us what is inside the object
+const personObj: object = {
+  name: "Max",
+  age: 30,
+};
+
+// a better way is to explicitly label each key in the object
+const personExObj: { name: string; age: number } = {
+  name: "Max",
+  age: 30,
+};
+
+// but we can use type inference instead since this is just a variable; except tuple is available
+const person = {
   name: "Max",
   age: 30,
 };
@@ -79,6 +93,13 @@ const arr: number[] = [1, 2, 3, 4];
 const role: [number, string] = [2, "author"];
 
 // ******* Enum
+// default to 0, 1, 2 in order
+enum R {
+  ADMIN,
+  READ_ONLY,
+  AUTHOR,
+}
+
 // after = is your value you want to assign to the enum
 enum Role {
   ADMIN = 5,
@@ -90,6 +111,7 @@ const roleEnum = Role.ADMIN;
 
 // ******* Any
 // Any kind of value
+// avoid if possible > it doesn't explicitly tells us what type it is
 const test: any = 123;
 
 // ******* Union
@@ -198,11 +220,12 @@ function addition(n1: number, n2: number): number {
   return n1 + n2;
 }
 
+// if you don't have a return statement
 function printResult(num: number): void {
   console.log("Result:" + num);
 }
 
-// undefined = return empty;
+// undefined = return empty; (required to return)
 function printResult2(num: number): undefined {
   console.log("Result:" + num);
   return;

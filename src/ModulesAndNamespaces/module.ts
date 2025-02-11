@@ -22,3 +22,8 @@ namespace App {
  * In tsconfig.json, set the outFile to "./dist/bundle.js" and module to "amd" instead of CommonJS
  */
 
+/**
+ * ES modules
+ *
+ * Alternative to namespace, we can use export / import (safer & more manageable)
+ */

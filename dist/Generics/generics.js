@@ -39,7 +39,7 @@ function mergeConstraints(objA, objB) {
 // const mergedObjConstraints = mergeConstraints({ name: "Max" }, 30);
 const mergedObjConstraints = mergeConstraints({ name: "Max" }, { age: 30 });
 console.log(mergedObjConstraints);
-function countAndDescribe(element) {
+function countAndDescribe(element, name) {
     let descriptionText = "Got no value.";
     if (element.length === 1) {
         descriptionText = "Got 1 element";
@@ -81,7 +81,7 @@ textStorage.addItem("Max");
 textStorage.addItem("Manu");
 textStorage.removeItem("Max");
 console.log(textStorage.getItems());
-const numberStorag = new DataStorage();
+const numberStorage = new DataStorage();
 function createCourseGoal(title, description, date) {
     let courseGoal = {};
     courseGoal.title = title;
@@ -94,5 +94,5 @@ const namess = ["Max", "Anna"];
 // namess.push("Manu");
 // namess.pop();
 // **** Generic Types vs Union Types
-// in classes, generic types give more flexiblity to what type is being pass into the class.
+// in classes, generic types give more flexiblity to what type is being pass into the class; lock in a specify typr for the class; ex: addItem / removeItem will follow the type being initialized rather than random type.
 // with union types, you need to specify each properties and method type when you write the code.

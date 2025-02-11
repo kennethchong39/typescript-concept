@@ -3,6 +3,8 @@
  * What is object oriented programming?
  *
  * - work with (real life) entities in your code
+ * - to reasons about your code
+ * - a programming model that organizes code around objects
  *
  * - Objects
  *  - the things you work with in code
@@ -54,6 +56,7 @@ accounting.describe();
 // output: Department: undefined;
 const accountingCopy = { describe: accounting.describe };
 accountingCopy.describe();
+// reference #40
 // const accountingCopyOne = { name: "Dummy", describe: accounting.describe };
 // accountingCopyOne.describe();
 // ***** private and public access modifies
@@ -72,8 +75,12 @@ accounting.printEmployeeInformation();
  * constructor(private id: string, public name: string) {}
  *
  */
+// ***** readonly property
+// you can add it to the constructor
+// provide extra safety to make it really clear certain property should only be initialized once and shouldn't chnage thereafter
 class ITDepartment extends Department {
     constructor(id, admins) {
+        // calls the constructor base class
         super(id, "IT");
         this.admins = admins;
     }
@@ -126,8 +133,10 @@ acc.printReport();
 acc.addEmployee("Ken");
 acc.printEmployeeInformation();
 // ***** getters and setters
+// allow you to get access to private property if needed
 const report = acc.mostRecentReport;
-console.log(report);
+console.log("report", report);
+// this is how you pass variable as setter
 // acc.mostRecentReport = "";
 acc.mostRecentReport = "year end report";
 // ***** static methods and properties
@@ -137,7 +146,9 @@ acc.mostRecentReport = "year end report";
 const employee1 = Department.createEmployee("Max");
 console.log(employee1, Department.fiscalYear);
 /**
- * for you to access the static method within the class you need to the class.fiscalYear instead of this.fiscalYear
+ * for you to access the static method within the class you need to call the class.fiscalYear instead of this.fiscalYear
+ * static methods is detacted from instances
+ * allow access static method or properties by calling the class "name" instead of "this."
  */
 // ***** abstract classes
 /**
@@ -147,13 +158,21 @@ console.log(employee1, Department.fiscalYear);
  *    abstract describe(this: Department) : void;
  * }
  *
- * abstract idea is to have every class set it's own decribe method when extending Department
+ * class ITDepartment extends Department {
+ *    describe() {
+ *        console.log('IT Department');
+ *    }
+ * }
+ *
+ * abstract idea is to have every class (required) set it's own decribe method when extending Department
  *
  * a class that can't be instantiated but has to be extended
  */
 // ***** singleton and private contructors
 /**
  *  the idea is to only create one instance of the class, you can do so by creating a static getInstance function to check
+ *
+ * example: accountant class
  *
  * you will only ever have one instance of a singleton class
  */

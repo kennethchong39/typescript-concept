@@ -56,7 +56,10 @@ interface Lengthy {
   length: number;
 }
 
-function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+function countAndDescribe<T extends Lengthy>(
+  element: T,
+  name?: string
+): [T, string] {
   let descriptionText = "Got no value.";
   if (element.length === 1) {
     descriptionText = "Got 1 element";
@@ -107,14 +110,14 @@ textStorage.addItem("Manu");
 textStorage.removeItem("Max");
 console.log(textStorage.getItems());
 
-const numberStorag = new DataStorage<number>();
+const numberStorage = new DataStorage<number>();
 
-// below isn't good because object is reference in nature so the removeItem no able to remove correct object
+// below code isn't good for object because object is reference in nature so the removeItem no able to remove correct object; except for maxObj since is reference the same memory
 // const objectStorage = new DataStorage<object>();
 // const maxObj = { name: 'Max' }
 // objectStorage.addItem({ name: "Max" });
 // objectStorage.addItem({ name: "Manu" });
-// objectStorage.removeItem({ name: "Max" });
+// objectStorage.removeItem({ name: "Manu" });
 // console.log(objectStorage.getItems());
 
 // ***** Generic Utility Types
@@ -145,5 +148,5 @@ const namess: Readonly<string[]> = ["Max", "Anna"];
 
 // **** Generic Types vs Union Types
 
-// in classes, generic types give more flexiblity to what type is being pass into the class.
+// in classes, generic types give more flexiblity to what type is being pass into the class; lock in a specify typr for the class; ex: addItem / removeItem will follow the type being initialized rather than random type.
 // with union types, you need to specify each properties and method type when you write the code.

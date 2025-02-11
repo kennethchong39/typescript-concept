@@ -14,11 +14,11 @@ function addAT(a, b) {
 }
 function printEmployeeInformation(emp) {
     console.log("Name: " + emp.name);
-    // this is type guards
+    // this is type guards (runtime checks)
     if ("privileges" in emp) {
         console.log("Privileges " + emp.privileges);
     }
-    // this is type guards
+    // this is type guards (runtime checks)
     if ("startDate" in emp) {
         console.log("Start Date " + emp.startDate);
     }
@@ -73,7 +73,7 @@ const errorBag = {
     email: "Not a valid email!",
 };
 // Function Overloads
-// Type Casting but there's a better way.
+// similar to Type Casting but there's a better way.
 // const results = addAT(1, 5) as string;
 // results.split(' ');
 // Add an extra line on top of addAT function

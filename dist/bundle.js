@@ -102,7 +102,7 @@ console.log((_a = fetchUserData === null || fetchUserData === void 0 ? void 0 : 
 const userInputAT = "";
 const storedData = userInputAT !== null && userInputAT !== void 0 ? userInputAT : "DEFAULT";
 /**
- * Core Types -> number, string, boolean
+ * Core Types -> number (no differentiation between integers and floats), string, boolean
  */
 // ******* string, number, boolean is types in typescript. All lowercase.
 function add(n1, n2, showResult) {
@@ -122,6 +122,7 @@ add(number1, number2, true);
  *  - In JS, can use typeof variable (ex: typeof n1 = number) (dynamic type)
  *      - fail in runtime
  *  - In TS, it can help enforce type during development before compile time (static type)
+ *      - fail in development time instead of runtime
  */
 /**
  * Type Casing
@@ -137,6 +138,17 @@ add(number1, number2, true);
  */
 // ******* Object Types
 // { age: 30 }
+// "object" isn't a good practice as it doesn't explicitly tell us what is inside the object
+const personObj = {
+    name: "Max",
+    age: 30,
+};
+// a better way is to explicitly label each key in the object
+const personExObj = {
+    name: "Max",
+    age: 30,
+};
+// but we can use type inference instead since this is just a variable; except tuple is available
 const person = {
     name: "Max",
     age: 30,
@@ -161,6 +173,13 @@ const arr = [1, 2, 3, 4];
  */
 const role = [2, "author"];
 // ******* Enum
+// default to 0, 1, 2 in order
+var R;
+(function (R) {
+    R[R["ADMIN"] = 0] = "ADMIN";
+    R[R["READ_ONLY"] = 1] = "READ_ONLY";
+    R[R["AUTHOR"] = 2] = "AUTHOR";
+})(R || (R = {}));
 // after = is your value you want to assign to the enum
 var Role;
 (function (Role) {
@@ -171,6 +190,7 @@ var Role;
 const roleEnum = Role.ADMIN;
 // ******* Any
 // Any kind of value
+// avoid if possible > it doesn't explicitly tells us what type it is
 const test = 123;
 // ******* Union
 function combineUnion(input1, input2) {
@@ -225,10 +245,11 @@ function combine(input1, input2, resultConversion) {
 function addition(n1, n2) {
     return n1 + n2;
 }
+// if you don't have a return statement
 function printResult(num) {
     console.log("Result:" + num);
 }
-// undefined = return empty;
+// undefined = return empty; (required to return)
 function printResult2(num) {
     console.log("Result:" + num);
     return;
@@ -272,6 +293,8 @@ console.log(res);
  * What is object oriented programming?
  *
  * - work with (real life) entities in your code
+ * - to reasons about your code
+ * - a programming model that organizes code around objects
  *
  * - Objects
  *  - the things you work with in code
@@ -323,6 +346,7 @@ accounting.describe();
 // output: Department: undefined;
 const accountingCopy = { describe: accounting.describe };
 accountingCopy.describe();
+// reference #40
 // const accountingCopyOne = { name: "Dummy", describe: accounting.describe };
 // accountingCopyOne.describe();
 // ***** private and public access modifies
@@ -341,8 +365,12 @@ accounting.printEmployeeInformation();
  * constructor(private id: string, public name: string) {}
  *
  */
+// ***** readonly property
+// you can add it to the constructor
+// provide extra safety to make it really clear certain property should only be initialized once and shouldn't chnage thereafter
 class ITDepartment extends Department {
     constructor(id, admins) {
+        // calls the constructor base class
         super(id, "IT");
         this.admins = admins;
     }
@@ -395,8 +423,10 @@ acc.printReport();
 acc.addEmployee("Ken");
 acc.printEmployeeInformation();
 // ***** getters and setters
+// allow you to get access to private property if needed
 const report = acc.mostRecentReport;
-console.log(report);
+console.log("report", report);
+console.log("testing");
 // acc.mostRecentReport = "";
 acc.mostRecentReport = "year end report";
 // ***** static methods and properties
@@ -825,7 +855,7 @@ const namess = ["Max", "Anna"];
 //   console.log(add(+input1.value, +input2.value));
 // });
 /**
- * typscript is a programming langauge - install a compiler > convert it into js
+ * typscript is a programming langauge also a "tool" - install a compiler > convert it into js
  *
  * Types
  * Next-gen JS features (compiled down for older Browsers)
@@ -865,17 +895,33 @@ const namess = ["Max", "Anna"];
  * to use watch mode - use `tsc file.ts --watch`
  */
 /**
+ * to initialize the project to typescript - use `tsc --init` provides the tsconfig.json
  * to compile entire project - use `tsc`
  */
 /**
  * including & excluding files - check out tsconfig.json to include / exclude files
+ * files - only specific file will be compiled (advice for only smaller project)
  */
 /**
- * soureMap allows you to see ts files in the browser's console when debugging (in Sources tab). when compile it creates a .map file. It is later than map by the browser.
+ * es6 essentially allows let/const
+ * target = es6
+ * if target is set to es6, the default lib is
+ *  "lib": [
+ *    "DOM",
+ *    "ES6",
+ *    "DOM.Iterable",
+ *    "ScriptHost"
+ *  ]
+ */
+/**
+ * sourceMap allows you to see typescript files in the browser's console
+ * when debugging (in Sources tab). When compile it creates a .map file. It
+ * is later than map by the browser.
  */
 /**
  * "outDir" > Redirect output structure to the directory.
  * "rootDir" > Specify the root directory of input files. Use to control the output
+ * "noEmitOnError" > avoid generating error TS file in the dist folder
  */
 const button = document.querySelector("button");
 button.addEventListener("click", () => {

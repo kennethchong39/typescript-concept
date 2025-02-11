@@ -6,7 +6,7 @@
 // **** a first class decorator
 // enable  "experimentalDecorators": true in tsconfig.json file
 
-// decorator is a function; excuted when the class is instantiate
+// decorator is a function; excuted when the class is instantiate = runs when JS finds the class definition
 function Logger(constructor: Function) {
   console.log("Logging");
   console.log(constructor);

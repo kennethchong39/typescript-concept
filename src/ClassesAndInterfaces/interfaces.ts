@@ -44,6 +44,11 @@ class PersonC implements Greetable {
   }
 }
 
+// both types are acceptable since PersonC implements Greetable
+// let userPersonC: Greetable;
+// let userPersonC: PersonC;
+// userPersonC = new PersonC("Ken");
+
 // **** why interface
 
 /**
@@ -53,6 +58,7 @@ class PersonC implements Greetable {
 // **** readonly interface properties
 
 interface GreetableOne {
+  // only can do readonly not private, public, protected or static
   readonly name: string;
 }
 
